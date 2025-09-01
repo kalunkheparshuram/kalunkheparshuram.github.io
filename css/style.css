@@ -1,0 +1,37 @@
+body{
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    width: 600px;
+    height: 100vh;
+    margin: auto;
+}
+
+.navigation {
+    background-color: rgb(255, 208, 0);
+    text-align: end;
+}
+
+.content {
+    background-color: white;
+}
+
+.navigation, section, .logo{
+    padding: 1rem;
+}
+
+footer{
+    padding: 0 1rem;
+}
+
+h4{
+    margin: 1.2rem 0 0 0;
+}
+
+li{
+    list-style-type: none;
+}
