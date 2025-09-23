@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7ae97d48.css",
+    "main.js": "/static/js/main.98b9b8f0.js",
+    "static/media/yayy-happy.gif": "/static/media/yayy-happy.2588298c0fa32f275e88.gif",
+    "static/media/guts.jpg": "/static/media/guts.2f157f4fd414db62583c.jpg",
+    "static/media/Parshuram Kalunkhe.pdf": "/static/media/Parshuram Kalunkhe.78d75df9637009352df5.pdf",
+    "static/media/thorfinn.png": "/static/media/thorfinn.5e83cf91e81ad0e47e63.png",
+    "static/media/skullknight.jpg": "/static/media/skullknight.bca822febe0592ea949c.jpg",
+    "static/media/tux-devil.webp": "/static/media/tux-devil.8e32806863d2b13f564d.webp",
+    "index.html": "/index.html",
+    "main.7ae97d48.css.map": "/static/css/main.7ae97d48.css.map",
+    "main.98b9b8f0.js.map": "/static/js/main.98b9b8f0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7ae97d48.css",
+    "static/js/main.98b9b8f0.js"
+  ]
+}
