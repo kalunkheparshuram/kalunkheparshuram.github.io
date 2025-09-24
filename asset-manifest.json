@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.7ae97d48.css",
-    "main.js": "/static/js/main.98b9b8f0.js",
+    "main.css": "/static/css/main.b3f240ac.css",
+    "main.js": "/static/js/main.00f0086e.js",
     "static/media/yayy-happy.gif": "/static/media/yayy-happy.2588298c0fa32f275e88.gif",
     "static/media/guts.jpg": "/static/media/guts.2f157f4fd414db62583c.jpg",
     "static/media/Parshuram Kalunkhe.pdf": "/static/media/Parshuram Kalunkhe.78d75df9637009352df5.pdf",
@@ -9,11 +9,11 @@
     "static/media/skullknight.jpg": "/static/media/skullknight.bca822febe0592ea949c.jpg",
     "static/media/tux-devil.webp": "/static/media/tux-devil.8e32806863d2b13f564d.webp",
     "index.html": "/index.html",
-    "main.7ae97d48.css.map": "/static/css/main.7ae97d48.css.map",
-    "main.98b9b8f0.js.map": "/static/js/main.98b9b8f0.js.map"
+    "main.b3f240ac.css.map": "/static/css/main.b3f240ac.css.map",
+    "main.00f0086e.js.map": "/static/js/main.00f0086e.js.map"
   },
   "entrypoints": [
-    "static/css/main.7ae97d48.css",
-    "static/js/main.98b9b8f0.js"
+    "static/css/main.b3f240ac.css",
+    "static/js/main.00f0086e.js"
   ]
 }
