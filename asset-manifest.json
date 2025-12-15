@@ -1,20 +1,19 @@
 {
   "files": {
     "main.css": "/static/css/main.6e1e45b1.css",
-    "main.js": "/static/js/main.25ce915b.js",
+    "main.js": "/static/js/main.ffef9eac.js",
     "static/media/Sunday - Aditya A  Naalayak  Ronit Vinta.mp3": "/static/media/Sunday - Aditya A  Naalayak  Ronit Vinta.987a83782dabb98a8faf.mp3",
     "static/media/yayy-happy.gif": "/static/media/yayy-happy.2588298c0fa32f275e88.gif",
-    "static/media/Parshuram Kalunkhe.pdf": "/static/media/Parshuram Kalunkhe.73a4b74fd1bce2c50150.pdf",
     "static/media/guts.jpg": "/static/media/guts.2f157f4fd414db62583c.jpg",
     "static/media/thorfinn.png": "/static/media/thorfinn.5e83cf91e81ad0e47e63.png",
     "static/media/skullknight.jpg": "/static/media/skullknight.bca822febe0592ea949c.jpg",
     "static/media/tux-devil.webp": "/static/media/tux-devil.8e32806863d2b13f564d.webp",
     "index.html": "/index.html",
     "main.6e1e45b1.css.map": "/static/css/main.6e1e45b1.css.map",
-    "main.25ce915b.js.map": "/static/js/main.25ce915b.js.map"
+    "main.ffef9eac.js.map": "/static/js/main.ffef9eac.js.map"
   },
   "entrypoints": [
     "static/css/main.6e1e45b1.css",
-    "static/js/main.25ce915b.js"
+    "static/js/main.ffef9eac.js"
   ]
 }
