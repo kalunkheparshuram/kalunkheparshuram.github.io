@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[Parshuram Kalunkhe] — Portfolio</title>
+  <meta name="description" content="Portfolio of [Your Name], [Your Title]. Projects, writing, and contact info.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+  <nav id="nav">
+    <div class="wrap">
+      <div class="logo">[<span>P</span>K] <span style="color:var(--text-dim);font-size:11px;">// athreya.v2</span>
+      </div>
+      <button id="nav-toggle" aria-label="Toggle menu">☰</button>
+      <ul id="nav-list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header id="hero">
+    <div class="wrap">
+      <div class="eyebrow">// hello, i'm</div>
+      <h1>[Parshuram <span class="accent">Kalunkhe</span>]</h1>
+      <div class="role-line"><span id="typed"></span></div>
+      <p class="tagline">
+        "Every bug tells a story—my job is to find it before someone else does." Every application, website, and
+        system has a story to tell—and sometimes that story begins with a hidden vulnerability. I enjoy exploring how
+        software works, uncovering security flaws before they can be exploited, and practicing responsible disclosure
+        to help organizations build more secure products. Through continuous learning, security research, and bug
+        bounty programs, I'm always expanding my knowledge and contributing to a safer digital ecosystem.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="#projects">View Projects</a>
+        <a class="btn ghost" href="#blog">Read Blog</a>
+        <a class="btn ghost" href="#contact">Contact Me</a>
+      </div>
+      <div class="crt-swatch" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about">
+    <div class="wrap">
+      <span class="section-num">01</span>
+      <h2 class="section-title reveal">About</h2>
+      <div class="cols">
+        <div class="bio reveal">
+          <p>
+            I'm a <b>Cybersecurity Researcher</b> focused on identifying
+            security vulnerabilities, conducting responsible security research, and helping organizations strengthen
+            their security posture. My work spans web application security, vulnerability assessment, penetration
+            testing, and responsible disclosure through bug bounty programs. I'm continually exploring emerging attack
+            techniques, web application security, cloud security, and open-source security tools. I believe effective
+            cybersecurity starts with curiosity, continuous learning, and a proactive approach to finding and fixing
+            vulnerabilities before they can be exploited.
+          </p>
+          <p>
+            I'm continually exploring emerging attack techniques, web application security, cloud security, and
+            open-source security tools. I believe effective cybersecurity starts with curiosity, continuous learning,
+            and a proactive approach to finding and fixing vulnerabilities before they can be exploited.
+          </p>
+        </div>
+        <div class="reveal">
+          <div class="timeline-block" style="margin-bottom:30px;">
+            <h3>Education</h3>
+            <div class="tl-item"><span class="yr">2020–2023</span>
+              <h4>BSC (IT), Mumbai University</h4>
+              <p>
+                The journey that sparked my passion for technology, embracing challenges, lifelong learning,
+                disciplined thinking, continuous growth, and the relentless pursuit of knowledge and excellence through
+                curiosity, persistence, and experience.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-block">
+            <h3>Experience</h3>
+            <div class="tl-item"><span class="yr">2023–Present</span>
+              <h4>Self-Employed, Freelance Security Researcher</h4>
+              <p>
+                Effective security is built on understanding systems—not assumptions. My work focuses on evaluating web
+                applications through disciplined security testing, identifying weaknesses that matter, and producing
+                technically rigorous reports that support informed remediation decisions. I value precision, evidence,
+                and clear communication throughout every stage of the assessment process.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills">
+    <div class="wrap">
+      <span class="section-num">02</span>
+      <h2 class="section-title reveal">Skills</h2>
+      <div class="skills-grid reveal" id="skills-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects">
+    <div class="wrap">
+      <span class="section-num">03</span>
+      <h2 class="section-title reveal">Projects</h2>
+      <div class="proj-grid reveal" id="proj-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ GALLERY ============ -->
+  <section id="gallery">
+    <div class="wrap">
+      <span class="section-num">04</span>
+      <h2 class="section-title reveal">Gallery</h2>
+      <div class="gallery-tabs reveal" id="gallery-tabs">
+        <button class="active" data-cat="all">All</button>
+        <button data-cat="nature">Nature</button>
+        <button data-cat="motorcycle">Motorcycle</button>
+        <button data-cat="clouds">Clouds</button> <!-- fixed: was "cloud" -->
+        <button data-cat="sky">Sky</button>
+        <button data-cat="landscape">Landscape</button>
+        <button data-cat="abstract">Abstract</button>
+      </div>
+      <div id="gallery-status">Loading photos…</div>
+      <div class="masonry reveal" id="masonry"></div>
+    </div>
+  </section>
+
+  <!-- ============ BLOG ============ -->
+  <section id="blog">
+    <div class="wrap">
+      <span class="section-num">05</span>
+      <h2 class="section-title reveal">Blog</h2>
+      <div class="blog-search reveal">
+        <input id="blog-search" type="text" placeholder="Search posts…">
+      </div>
+      <div class="blog-list reveal" id="blog-list"></div>
+      <div class="blog-reader" id="blog-reader">
+        <button class="btn ghost" id="reader-back">← All posts</button>
+        <div class="reader-body" id="reader-body"></div>
+        <div class="reader-nav">
+          <button class="btn ghost" id="reader-prev">← Prev</button>
+          <button class="btn ghost" id="reader-next">Next →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact">
+    <div class="wrap">
+      <span class="section-num">06</span>
+      <h2 class="section-title reveal">Contact</h2>
+      <div class="contact-grid">
+        <div class="reveal">
+          <p style="color:var(--text);font-size:16px;">Have a project, role, or question in mind? Reach out below or
+            through any of these.</p>
+          <ul class="contact-links">
+            <li><span>Email</span><a href="mailto:parshuramkalunkhe@proton.me"
+                target="_blank">parshuramkalunkhe@proton.me</a></li>
+            <li><span>GitHub</span><a href="https://github.com/kalunkheparshuram">github.com/kalunkheparshuram</a></li>
+            <li><span>LinkedIn</span><a
+                href="https://www.linkedin.com/in/parshuramkalunkhe">linkedin.com/in/parshuramkalunkhe</a></li>
+            <li><span>Instagram</span><a
+                href="https://www.instagram.com/parshuramkalunkhe">instagram.com/parshuramkalunkhe</a></li>
+            <li><span>#IRC</span><a href="#">comming soon.</a></li>
+            <li><span>Based in</span><span>[Mumbai, India]</span></li>
+            <li><span>Focus</span><span>[ Security Researcher / Freelancer]</span></li>
+            <li><span>Available</span><span>[Open to work / Freelance]</span></li>
+          </ul>
+        </div>
+        <form class="form-min reveal" id="contact-form" novalidate>
+          <input type="hidden" name="_subject" value="Portfolio Contact">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_honey" style="display:none">
+          <div>
+            <label for="c-name">Name</label>
+            <input id="c-name" name="name" type="text" maxlength="60" autocomplete="name" required>
+            <small class="err" id="e-name"></small>
+          </div>
+          <div>
+            <label for="c-email">Email</label>
+            <input id="c-email" name="email" type="email" maxlength="120" autocomplete="email" required>
+            <small class="err" id="e-email"></small>
+          </div>
+          <div>
+            <label for="c-msg">Message</label>
+            <textarea id="c-msg" name="message" rows="5" maxlength="2000" required></textarea>
+            <small class="err" id="e-msg"></small>
+          </div>
+          <button class="btn" id="c-submit" type="submit">Send Message →</button>
+          <div class="ok" id="c-ok">✓ Message sent — thanks, I'll get back to you soon.</div>
+          <div class="err" id="c-fail">Something went wrong sending that. Try again, or email me directly.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> [Parshuram Kalunkhe]. // stay curious. stay secure.
+  </footer>
+
+  <div id="lightbox">
+    <div id="lb-img">preview</div>
+    <button class="btn ghost" id="lb-close">Close ✕</button>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/main.js"></script>
+
+  <script src="assets/js/skills.js"></script>
+
+  <script src="assets/js/post.js"></script>
+
+  <script src="assets/js/gallery.js"></script>
+
+</body>
+
+</html>
