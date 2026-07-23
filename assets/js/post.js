@@ -11,6 +11,7 @@
 
   const GITHUB_USER = "kalunkheparshuram";
   const GITHUB_REPO = "blogs";
+  const GITHUB_BRANCH = "main";
   const GITHUB_BLOG_PATH = "content";
 
   /*
@@ -523,27 +524,51 @@ The best portfolios are never truly finished. They simply become a better reflec
   }
 
   /* ============================================================
-     LOAD BLOG POSTS FROM GITHUB
+     LOAD BLOG POSTS — via jsDelivr instead of api.github.com
+
+     WHY: api.github.com is capped at 60 requests/hour PER VISITOR IP.
+     That's shared across every site the visitor's IP hits that day —
+     easy to blow through on a shared/office/campus IP. jsDelivr's
+     Data API returns the whole repo's file tree in one cached request
+     and isn't subject to that limit, and the CDN also serves the raw
+     .md content, so no api.github.com or raw.githubusercontent.com
+     calls happen at all.
+
+     CACHING NOTE: jsDelivr caches at the edge. If a freshly-pushed post
+     doesn't show up right away, purge it once:
+       https://purge.jsdelivr.net/gh/<user>/<repo>@<branch>/
   ============================================================ */
+
+  function toJsDelivrRawUrl(path) {
+    return `https://cdn.jsdelivr.net/gh/${GITHUB_USER}/${GITHUB_REPO}@${GITHUB_BRANCH}/${path}`;
+  }
+
+  async function fetchJsDelivrTree() {
+    const res = await fetch(`https://data.jsdelivr.com/v1/packages/gh/${GITHUB_USER}/${GITHUB_REPO}@${GITHUB_BRANCH}`);
+    if (!res.ok) throw new Error('jsDelivr listing failed: ' + res.status);
+    const data = await res.json();
+    return data.files || [];
+  }
+
+  // Walks the tree down a slash-separated path, returning that directory's children
+  function resolvePath(tree, pathStr) {
+    if (!pathStr) return tree;
+    let node = tree;
+    for (const part of pathStr.split('/').filter(Boolean)) {
+      const match = node.find(function (f) { return f.name === part && f.type === 'directory'; });
+      if (!match) return [];
+      node = match.files || [];
+    }
+    return node;
+  }
+
   async function loadFromGitHub() {
     try {
       /* ----------------------------------------------------------
-         BUILD GITHUB CONTENTS API PATH
+         ONE cached request for the whole repo's file tree.
       ---------------------------------------------------------- */
-      const path = GITHUB_BLOG_PATH ? `/contents/${GITHUB_BLOG_PATH}` : "/contents";
-      const apiURL = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}${path}`;
-
-      /* ----------------------------------------------------------
-         REQUEST REPOSITORY CONTENTS
-      ---------------------------------------------------------- */
-      const response = await fetch(apiURL);
-      if (!response.ok) { throw new Error(`GitHub API error: ${response.status}`); }
-
-      const files = await response.json();
-
-      /* GitHub should return an array when requesting a directory.*/
-
-      if (!Array.isArray(files)) { throw new Error("GitHub API did not return a directory listing."); }
+      const tree = await fetchJsDelivrTree();
+      const dirFiles = resolvePath(tree, GITHUB_BLOG_PATH);
 
       /* ----------------------------------------------------------
          FIND MARKDOWN FILES
@@ -559,17 +584,21 @@ The best portfolios are never truly finished. They simply become a better reflec
          images
          other files
       ---------------------------------------------------------- */
-
-      const mdFiles = files.filter(
+      const mdFiles = dirFiles.filter(
         function (file) { return (file.type === "file" && file.name.toLowerCase().endsWith(".md") && file.name.toLowerCase() !== "readme.md"); }
       );
 
+      if (!mdFiles.length) { throw new Error("No markdown posts found."); }
+
+      const basePath = GITHUB_BLOG_PATH ? GITHUB_BLOG_PATH.replace(/\/$/, "") + "/" : "";
+
       /* ----------------------------------------------------------
-         DOWNLOAD AND PARSE EACH MARKDOWN FILE
+         DOWNLOAD AND PARSE EACH MARKDOWN FILE, through the CDN
       ---------------------------------------------------------- */
       posts = await Promise.all(mdFiles.map(
         async function (file) {
-          const markdownResponse = await fetch(file.download_url);
+          const url = toJsDelivrRawUrl(basePath + file.name);
+          const markdownResponse = await fetch(url);
           if (!markdownResponse.ok) {
             throw new Error(`Failed to load ${file.name}`);
           }
@@ -616,10 +645,10 @@ The best portfolios are never truly finished. They simply become a better reflec
     }
 
     /* ============================================================
-       GITHUB FAILED
+       GITHUB / JSDELIVR FAILED
     ===+======================================================== */
     catch (error) {
-      console.error("Failed to load GitHub blogs:", error);
+      console.error("Failed to load blogs via jsDelivr:", error);
       console.warn("Loading local sample posts instead.");
       loadLocalSamples();
     }

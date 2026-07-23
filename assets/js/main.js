@@ -2,11 +2,34 @@
 (function () {
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // mobile nav
+  // mobile nav — full-screen overlay
   const toggle = document.getElementById('nav-toggle');
   const list = document.getElementById('nav-list');
-  toggle.addEventListener('click', () => list.classList.toggle('open'));
-  list.querySelectorAll('a').forEach(a => a.addEventListener('click', () => list.classList.remove('open')));
+  const navEl = document.getElementById('nav');
+
+  function openMenu(){
+    list.classList.add('open');
+    navEl.classList.add('menu-open');
+    document.body.classList.add('nav-open');
+    toggle.textContent = '✕';
+    toggle.classList.add('is-close');
+    toggle.setAttribute('aria-label', 'Close menu');
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu(){
+    list.classList.remove('open');
+    navEl.classList.remove('menu-open');
+    document.body.classList.remove('nav-open');
+    toggle.textContent = '☰';
+    toggle.classList.remove('is-close');
+    toggle.setAttribute('aria-label', 'Open menu');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  toggle.addEventListener('click', () => {
+    list.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  list.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  window.addEventListener('keydown', e => { if(e.key === 'Escape') closeMenu(); });
 
   // hero typing
   const roles = [

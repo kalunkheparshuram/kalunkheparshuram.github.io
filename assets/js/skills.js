@@ -26,14 +26,30 @@
   PROJECTS.forEach(p => {
     const el = document.createElement('div');
     el.className = 'proj-card';
+    const imgHTML = p.imgURL ? `<img alt="${p.title}">` : `[ IMAGE PLACEHOLDER ]`;
     el.innerHTML = `
-      <div class="proj-img">${p.imgURL ? `<img src="${p.imgURL}" alt="${p.title}">` : `[ IMAGE PLACEHOLDER ]`}</div>
+      <div class="proj-img${p.imgURL ? ' loading img-skeleton' : ''}">${imgHTML}</div>
       <div class="proj-body">
         <h3>${p.title}</h3>
         <p>${p.desc}</p>
         <div class="tech-row">${p.tech.map(t => `<span>${t}</span>`).join('')}</div>
-        <div class="proj-links"><a href="${p.repo}">GitHub →</a> ${p.demo && p.demo !== "#" ? `<a href="${p.demo}" target="_blank" rel="noopener noreferrer">Live Demo →</a>`: ""}</div>
+        <div class="proj-links"><a href="${p.repo}" target="_blank" rel="noopener noreferrer">GitHub →</a> ${p.demo && p.demo !== "#" ? `<a href="${p.demo}" target="_blank" rel="noopener noreferrer">Live Demo →</a>`: ""}</div>
       </div>`;
+
+    if (p.imgURL) {
+      const imgEl = el.querySelector('.proj-img img');
+      const wrapEl = el.querySelector('.proj-img');
+      imgEl.addEventListener('load', () => {
+        imgEl.classList.add('loaded');
+        wrapEl.classList.remove('loading', 'img-skeleton');
+      });
+      imgEl.addEventListener('error', () => {
+        wrapEl.classList.remove('loading', 'img-skeleton');
+        wrapEl.textContent = '[ IMAGE UNAVAILABLE ]';
+      });
+      imgEl.src = p.imgURL; // set after listeners are attached so 'load' can't fire first
+    }
+
     pgrid.appendChild(el);
   });
 

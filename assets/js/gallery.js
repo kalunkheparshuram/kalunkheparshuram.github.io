@@ -1,22 +1,32 @@
-/* ---- Gallery: GitHub repo for storage, jsDelivr as the CDN ----
+/* ---- Gallery: GitHub repo for storage, jsDelivr for BOTH listing and images ----
 
      Setup:
      1. Compress your photos first (see command below) — web resolution,
         not camera-original. ~150-300KB per photo at ~1920px wide is plenty.
      2. Commit them into your repo under gallery/<category>/photo.jpg
      3. Set GH_USER, GH_REPO, GH_BRANCH below.
-     4. That's it — this script lists files via the GitHub API, then
-        serves the actual images through jsDelivr instead of raw GitHub,
-        so visitors get real CDN edges instead of GitHub's raw file server.
+     4. That's it.
 
-     jsDelivr URL pattern (built automatically below):
-       https://cdn.jsdelivr.net/gh/<user>/<repo>@<branch>/<path>
+     WHY jsDelivr FOR THE LISTING TOO (not just the images):
+     The previous version listed folders/files via api.github.com, which is
+     capped at 60 requests/hour PER VISITOR IP — and it made one request per
+     category folder (root + N subfolders), so a page with 5-6 categories
+     could burn through a visitor's quota fast, especially if they're on a
+     shared IP (office wifi, VPN, campus network) with other GitHub API users.
+     jsDelivr's Data API (data.jsdelivr.com) returns the ENTIRE repo file
+     tree in a single cached request and isn't subject to that per-IP limit,
+     so this version uses it for discovery, then serves the actual image
+     bytes through the jsDelivr CDN as before.
 
-     Note on the GitHub listing call: unauthenticated GitHub API is capped
-     at 60 requests/hour PER VISITOR IP, not per site — fine for a personal
-     portfolio's traffic levels. If that ever becomes a problem, swap
-     loadGalleryFromGitHub() for a static manifest.json instead (same
-     jsDelivr URLs, just listed by hand once instead of fetched live).
+     jsDelivr URL patterns (built automatically below):
+       Listing:  https://data.jsdelivr.com/v1/packages/gh/<user>/<repo>@<branch>
+       Image:    https://cdn.jsdelivr.net/gh/<user>/<repo>@<branch>/<path>
+
+     CACHING NOTE: jsDelivr caches aggressively at the edge. New commits can
+     take a while to show up. If you need changes to appear immediately,
+     purge the cache after pushing:
+       https://purge.jsdelivr.net/gh/<user>/<repo>@<branch>/
+     (open that URL once in a browser after each gallery update)
 
      One-time image compression (run before committing, needs imagemagick):
        for f in gallery/*.jpg; do
@@ -29,7 +39,7 @@
     const GH_USER = "kalunkheparshuram";
     const GH_REPO = "gallery";
     const GH_BRANCH = "main";
-    const GALLERY_PATH = "";
+    const GALLERY_PATH = ""; // subfolder inside the repo, if your categories aren't at the root
     const IMG_EXT = /\.(jpe?g|png|gif|webp)$/i;
     const RANDOM_SAMPLE_PER_CATEGORY = 3; // how many images per category to show in the "all" tab
 
@@ -45,6 +55,16 @@
     const masonry = document.getElementById('masonry');
     const galleryStatus = document.getElementById('gallery-status');
     let GALLERY_ITEMS = [];
+
+    // Escapes text before it's dropped into innerHTML (filenames become
+    // alt text / captions, so treat them as untrusted input, same as blog content).
+    function escapeHTML(text) {
+        return String(text)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+    }
 
     // Fisher-Yates shuffle, doesn't mutate the input
     function shuffled(arr) {
@@ -75,17 +95,59 @@
 
         items.forEach(i => {
             const d = document.createElement('div');
+            const safeLabel = escapeHTML(i.label);
+
             if (i.url) {
-                d.className = 'tile';
-                d.innerHTML = `<img src="${i.url}" alt="${i.label}" loading="lazy"><div class="cap">${i.label}</div>`;
+                d.className = 'tile loading img-skeleton';
+                d.style.minHeight = (150 + Math.floor(Math.random() * 70)) + 'px';
+
+                const img = document.createElement('img');
+                img.src = i.url;
+                img.alt = safeLabel;
+                img.loading = 'lazy';
+                img.addEventListener('load', () => {
+                    img.classList.add('loaded');
+                    d.classList.remove('loading', 'img-skeleton');
+                    d.style.minHeight = '';
+                });
+                img.addEventListener('error', () => {
+                    d.classList.remove('loading', 'img-skeleton');
+                    d.className = 'tile placeholder';
+                    d.textContent = safeLabel + ' (image unavailable)';
+                });
+
+                const cap = document.createElement('div');
+                cap.className = 'cap';
+                cap.textContent = i.label;
+
+                d.appendChild(img);
+                d.appendChild(cap);
             } else {
                 d.className = 'tile placeholder';
                 d.style.height = (150 + Math.floor(Math.random() * 70)) + 'px';
                 d.textContent = i.label;
             }
+
             d.addEventListener('click', () => {
                 const lb = document.getElementById('lb-img');
-                lb.innerHTML = i.url ? `<img src="${i.url}" alt="${i.label}">` : i.label;
+                lb.innerHTML = '';
+                if (i.url) {
+                    lb.classList.add('img-skeleton');
+                    const bigImg = document.createElement('img');
+                    bigImg.src = i.url;
+                    bigImg.alt = safeLabel;
+                    bigImg.addEventListener('load', () => {
+                        bigImg.classList.add('loaded');
+                        lb.classList.remove('img-skeleton');
+                    });
+                    bigImg.addEventListener('error', () => {
+                        lb.classList.remove('img-skeleton');
+                        lb.textContent = safeLabel + ' (image unavailable)';
+                    });
+                    lb.appendChild(bigImg);
+                } else {
+                    lb.textContent = safeLabel;
+                }
                 document.getElementById('lightbox').classList.add('open');
             });
             masonry.appendChild(d);
@@ -116,32 +178,55 @@
         return `https://cdn.jsdelivr.net/gh/${GH_USER}/${GH_REPO}@${GH_BRANCH}/${path}`;
     }
 
+    /* ------------------------------------------------------------
+       jsDelivr Data API — single request, whole-repo file tree.
+       Response shape: { files: [ {type:'file'|'directory', name, files?} ] }
+       `files` is only present (and nested) on directory entries.
+    ------------------------------------------------------------ */
+    async function fetchJsDelivrTree() {
+        const res = await fetch(`https://data.jsdelivr.com/v1/packages/gh/${GH_USER}/${GH_REPO}@${GH_BRANCH}`);
+        if (!res.ok) throw new Error('jsDelivr listing failed: ' + res.status);
+        const data = await res.json();
+        return data.files || [];
+    }
+
+    // Walks the tree down a slash-separated path, returning that directory's children
+    function resolvePath(tree, pathStr) {
+        if (!pathStr) return tree;
+        let node = tree;
+        for (const part of pathStr.split('/').filter(Boolean)) {
+            const match = node.find(f => f.name === part && f.type === 'directory');
+            if (!match) return [];
+            node = match.files || [];
+        }
+        return node;
+    }
+
     async function loadGalleryFromGitHub() {
         try {
-            const res = await fetch(`https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/${GALLERY_PATH}?ref=${GH_BRANCH}`);
-            if (!res.ok) throw new Error('gallery folder not found: ' + res.status);
-            const folders = (await res.json()).filter(f => f.type === 'dir');
+            const tree = await fetchJsDelivrTree();
+            const root = resolvePath(tree, GALLERY_PATH);
+            const folders = root.filter(f => f.type === 'directory');
             if (!folders.length) throw new Error('no category folders in /gallery');
 
-            const perFolder = await Promise.all(folders.map(async folder => {
-                const r = await fetch(folder.url);
-                const files = await r.json();
-                return files
-                    .filter(f => f.type === 'file' && IMG_EXT.test(f.name))
-                    .map(f => ({
-                        cat: folder.name,
-                        label: f.name.replace(IMG_EXT, ''),
-                        url: toJsDelivrUrl(f.path)
-                    }));
-            }));
+            const basePath = GALLERY_PATH ? GALLERY_PATH.replace(/\/$/, '') + '/' : '';
 
-            const items = perFolder.flat();
+            const items = folders.flatMap(folder => {
+                const files = (folder.files || []).filter(f => f.type === 'file' && IMG_EXT.test(f.name));
+                return files.map(f => ({
+                    cat: folder.name,
+                    label: f.name.replace(IMG_EXT, ''),
+                    url: toJsDelivrUrl(`${basePath}${folder.name}/${f.name}`)
+                }));
+            });
+
             if (!items.length) throw new Error('no images found in /gallery/*');
 
             GALLERY_ITEMS = items;
             openCategory('all');
-            galleryStatus.textContent = items.length + ' photos loaded from github.';
+            galleryStatus.textContent = items.length + ' photos loaded from github (via jsDelivr).';
         } catch (err) {
+            console.error('Gallery load failed:', err);
             useLocalPlaceholders('Showing placeholder photos');
         }
     }
