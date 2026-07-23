@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>[Parshuram Kalunkhe] — Portfolio</title>
   <meta name="description" content="Portfolio of [Your Name], [Your Title]. Projects, writing, and contact info.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://cdn.jsdelivr.net data:; connect-src 'self' https://data.jsdelivr.com https://cdn.jsdelivr.net https://formsubmit.co; form-action https://formsubmit.co; base-uri 'self'; object-src 'none'; frame-ancestors 'none';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
   <script src="assets/js/main.js" defer></script>
@@ -18,9 +20,8 @@
 
   <nav id="nav">
     <div class="wrap">
-      <div class="logo">[<span>P</span>K] <span style="color:var(--text-dim);font-size:11px;">// athreya.v2</span>
-      </div>
-      <button id="nav-toggle" aria-label="Toggle menu">☰</button>
+      <div class="logo">[<span>P</span>K] <span style="color:var(--text-dim);font-size:11px;">// athreya.v2</span></div>
+      <button id="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
       <ul id="nav-list">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
@@ -172,13 +173,12 @@
           <p style="color:var(--text);font-size:16px;">Have a project, role, or question in mind? Reach out below or
             through any of these.</p>
           <ul class="contact-links">
-            <li><span>Email</span><a href="mailto:parshuramkalunkhe@proton.me"
-                target="_blank">parshuramkalunkhe@proton.me</a></li>
-            <li><span>GitHub</span><a href="https://github.com/kalunkheparshuram">github.com/kalunkheparshuram</a></li>
+            <li><span>Email</span><a href="mailto:parshuramkalunkhe@proton.me">parshuramkalunkhe@proton.me</a></li>
+            <li><span>GitHub</span><a href="https://github.com/kalunkheparshuram" target="_blank" rel="noopener noreferrer">github.com/kalunkheparshuram</a></li>
             <li><span>LinkedIn</span><a
-                href="https://www.linkedin.com/in/parshuramkalunkhe">linkedin.com/in/parshuramkalunkhe</a></li>
+                href="https://www.linkedin.com/in/parshuramkalunkhe" target="_blank" rel="noopener noreferrer">linkedin.com/in/parshuramkalunkhe</a></li>
             <li><span>Instagram</span><a
-                href="https://www.instagram.com/parshuramkalunkhe">instagram.com/parshuramkalunkhe</a></li>
+                href="https://www.instagram.com/parshuramkalunkhe" target="_blank" rel="noopener noreferrer">instagram.com/parshuramkalunkhe</a></li>
             <li><span>#IRC</span><a href="#">comming soon.</a></li>
             <li><span>Based in</span><span>[Mumbai, India]</span></li>
             <li><span>Focus</span><span>[ Security Researcher / Freelancer]</span></li>
@@ -214,7 +214,7 @@
   </section>
 
   <footer>
-    © <span id="year"></span> [Parshuram Kalunkhe]. // stay curious. stay secure.
+    © <span id="year"></span> to [Parshuram Kalunkhe]. <span class="ftr">// stay curious. stay secure.</span>
   </footer>
 
   <div id="lightbox">
