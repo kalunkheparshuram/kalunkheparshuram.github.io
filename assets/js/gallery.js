@@ -22,6 +22,13 @@
        Listing:  https://data.jsdelivr.com/v1/packages/gh/<user>/<repo>@<branch>
        Image:    https://cdn.jsdelivr.net/gh/<user>/<repo>@<branch>/<path>
 
+     FILENAME NOTE: filenames with spaces, emoji, or other non-ASCII/reserved
+     characters (e.g. "✨ Emerald Dreamscape.jpg") MUST be percent-encoded
+     per path segment before being used in a URL, or the request 404s /
+     silently fails. toJsDelivrUrl() below does this automatically, but the
+     safest long-term fix is to just not use spaces/emoji in filenames —
+     rename them to something like "emerald-dreamscape.jpg" in the repo.
+
      CACHING NOTE: jsDelivr caches aggressively at the edge. New commits can
      take a while to show up. If you need changes to appear immediately,
      purge the cache after pushing:
@@ -114,6 +121,8 @@
                     d.classList.remove('loading', 'img-skeleton');
                     d.className = 'tile placeholder';
                     d.textContent = safeLabel + ' (image unavailable)';
+                    // Uncomment while debugging a specific file to see the exact URL that failed:
+                    // console.warn('Image failed to load:', i.url);
                 });
 
                 const cap = document.createElement('div');
@@ -173,9 +182,19 @@
         galleryStatus.textContent = note;
     }
 
-    // Converts a repo-relative path to a jsDelivr CDN URL
+    // Converts a repo-relative path to a jsDelivr CDN URL.
+    // FIX: percent-encode each path segment individually. Filenames with
+    // spaces, emoji, or other reserved/non-ASCII characters (e.g.
+    // "✨ Emerald Dreamscape.jpg") will otherwise produce a malformed URL
+    // that 404s or gets silently dropped by the browser/CDN. We encode
+    // segment-by-segment (not the whole path with one encodeURIComponent
+    // call) so the "/" separators between folder/file names are preserved.
     function toJsDelivrUrl(path) {
-        return `https://cdn.jsdelivr.net/gh/${GH_USER}/${GH_REPO}@${GH_BRANCH}/${path}`;
+        const encodedPath = path
+            .split('/')
+            .map(segment => encodeURIComponent(segment))
+            .join('/');
+        return `https://cdn.jsdelivr.net/gh/${GH_USER}/${GH_REPO}@${GH_BRANCH}/${encodedPath}`;
     }
 
     /* ------------------------------------------------------------
