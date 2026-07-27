@@ -221,34 +221,29 @@
         return node;
     }
 
-    async function loadGalleryFromGitHub() {
-        try {
-            const tree = await fetchJsDelivrTree();
-            const root = resolvePath(tree, GALLERY_PATH);
-            const folders = root.filter(f => f.type === 'directory');
-            if (!folders.length) throw new Error('no category folders in /gallery');
-
-            const basePath = GALLERY_PATH ? GALLERY_PATH.replace(/\/$/, '') + '/' : '';
-
-            const items = folders.flatMap(folder => {
-                const files = (folder.files || []).filter(f => f.type === 'file' && IMG_EXT.test(f.name));
-                return files.map(f => ({
-                    cat: folder.name,
-                    label: f.name.replace(IMG_EXT, ''),
-                    url: toJsDelivrUrl(`${basePath}${folder.name}/${f.name}`)
-                }));
-            });
-
-            if (!items.length) throw new Error('no images found in /gallery/*');
-
-            GALLERY_ITEMS = items;
-            openCategory('all');
-            galleryStatus.textContent = items.length + ' photos loaded from github (via jsDelivr).';
-        } catch (err) {
-            console.error('Gallery load failed:', err);
-            useLocalPlaceholders('Showing placeholder photos');
-        }
-    }
+     async function loadGalleryFromGitHub() {
+         try {
+             const response = await fetch(
+                 "https://cdn.jsdelivr.net/gh/kalunkheparshuram/gallery@main/gallery.json?v=" + Date.now()
+             );
+             const data = await response.json();
+             GALLERY_ITEMS = [];
+             data.categories.forEach(category => {
+                 category.images.forEach(image => {
+                     GALLERY_ITEMS.push({
+                         cat: category.name,
+                         label: image.replace(/\.[^/.]+$/, ""),
+                         url: `https://cdn.jsdelivr.net/gh/kalunkheparshuram/gallery@main/` + `${category.name}/${encodeURIComponent(image)}`
+                     });
+                 });
+             });
+             openCategory("all");
+             galleryStatus.textContent =`${GALLERY_ITEMS.length} photos loaded`;
+         }
+         catch (err) {
+             useLocalPlaceholders("Unable to load gallery");
+         }
+     }
 
     wireTabs();
     document.getElementById('lb-close').addEventListener('click', () => document.getElementById('lightbox').classList.remove('open'));
