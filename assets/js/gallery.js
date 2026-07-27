@@ -223,24 +223,21 @@
 
      async function loadGalleryFromGitHub() {
          try {
-             const response = await fetch(
-                 "https://cdn.jsdelivr.net/gh/kalunkheparshuram/gallery@main/gallery.json?v=" + Date.now()
-             );
+              const response = await fetch("./gallery.json?v=" + Date.now());
+             if(!response.ok)
+                 throw new Error("Unable to fetch gallery.json");
              const data = await response.json();
-             GALLERY_ITEMS = [];
-             data.categories.forEach(category => {
-                 category.images.forEach(image => {
-                     GALLERY_ITEMS.push({
-                         cat: category.name,
-                         label: image.replace(/\.[^/.]+$/, ""),
-                         url: `https://cdn.jsdelivr.net/gh/kalunkheparshuram/gallery@main/` + `${category.name}/${encodeURIComponent(image)}`
-                     });
+             GALLERY_ITEMS=[];
+             data.categories.forEach(category=>{
+                 category.images.forEach(image=>{
+                     GALLERY_ITEMS.push({cat: category.name, label: image.title,url: `https://cdn.jsdelivr.net/gh/kalunkheparshuram/gallery@main/${category.name}/${encodeURIComponent(image.file)}`});
                  });
              });
              openCategory("all");
-             galleryStatus.textContent =`${GALLERY_ITEMS.length} photos loaded`;
+             galleryStatus.textContent=`${GALLERY_ITEMS.length} Photos`;
          }
-         catch (err) {
+         catch(err){
+            // console.error(err);
              useLocalPlaceholders("Unable to load gallery");
          }
      }
