@@ -275,7 +275,7 @@ body.nav-open{overflow:hidden;}
   font-family:var(--font-body);padding:12px;font-size:16px;
   width: 100%;
 }
-.form-min textarea{height:clamp(140px,32vh,282px);resize:vertical;}
+.form-min textarea{height:clamp(140px,40vh,282px);resize:vertical;}
 .form-min input:focus,.form-min textarea:focus{outline:none;border-color:var(--yellow);}
 .form-min .err{font-size:11px;color:#e2857a;display:none;margin-top:4px;}
 .form-min .err.show{display:block;}
