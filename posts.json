@@ -1,0 +1,44 @@
+{
+  "updated": "2026-07-29T06:18:44.559Z",
+  "posts": [
+    {
+      "file": "minimalism-or-maximalism.md",
+      "slug": "minimalism-or-maximalism",
+      "title": "Minimalism or Maximalism? Finding the Right Balance",
+      "date": "2026-07-29",
+      "tags": [
+        "design",
+        "productivity",
+        "minimalism",
+        "maximalism",
+        "philosophy",
+        "technology"
+      ]
+    },
+    {
+      "file": "local-first-computing.md",
+      "slug": "local-first-computing",
+      "title": "Why I Believe in Local-First Computing",
+      "date": "2026-07-23",
+      "tags": [
+        "self-hosting",
+        "privacy",
+        "homelab",
+        "local-first",
+        "open-source"
+      ]
+    },
+    {
+      "file": "portfolio-journey.md",
+      "slug": "portfolio-journey",
+      "title": "Building My Digital Workspace",
+      "date": "2026-07-22",
+      "tags": [
+        "portfolio",
+        "web-development",
+        "cybersecurity",
+        "personal"
+      ]
+    }
+  ]
+}
