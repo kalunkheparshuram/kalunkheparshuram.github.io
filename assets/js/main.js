@@ -33,9 +33,8 @@
 
   // hero typing
   const roles = [
-    "Cyber Security Researcher.",
+    "Cyber Security Analyst.",
     "Bug Bounty Hunter.",
-    "Security Freelancer."
   ];
   const typedEl = document.getElementById('typed');
   let ri = 0;
