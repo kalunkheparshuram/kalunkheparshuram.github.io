@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-27T17:40:57.376Z",
+  "updated": "2026-08-01T14:09:24.109Z",
   "categories": [
     {
       "name": "abstract",
@@ -13,6 +13,18 @@
     {
       "name": "clouds",
       "images": [
+        {
+          "file": "☁️ Cloud Whisper.jpg",
+          "title": "☁️ Cloud Whisper"
+        },
+        {
+          "file": "💭 Quiet Infinity.jpg",
+          "title": "💭 Quiet Infinity"
+        },
+        {
+          "file": "🤍 Sky Remembers.jpg",
+          "title": "🤍 Sky Remembers"
+        },
         {
           "file": "cloud1.jpg",
           "title": "cloud1"
@@ -48,6 +60,10 @@
       "name": "motorcycle",
       "images": [
         {
+          "file": "🍂 Every mile left something behind..jpg",
+          "title": "🍂 Every mile left something behind."
+        },
+        {
           "file": "motorcycle1.jpg",
           "title": "motorcycle1"
         }
@@ -63,6 +79,22 @@
         {
           "file": "🌄 Realm of Everlight.jpg",
           "title": "🌄 Realm of Everlight"
+        },
+        {
+          "file": "🌌 Starry Night.jpg",
+          "title": "🌌 Starry Night"
+        },
+        {
+          "file": "🌺 Bloom Forever.jpg",
+          "title": "🌺 Bloom Forever"
+        },
+        {
+          "file": "💫 Ethereal Path.jpg",
+          "title": "💫 Ethereal Path"
+        },
+        {
+          "file": "🕉️ Celestial Presence (ॐ नमः शिवाय).jpg",
+          "title": "🕉️ Celestial Presence (ॐ नमः शिवाय)"
         },
         {
           "file": "nature3.jpg",
@@ -105,6 +137,10 @@
     {
       "name": "sky",
       "images": [
+        {
+          "file": "✨ Luminous Horizon.jpg",
+          "title": "✨ Luminous Horizon"
+        },
         {
           "file": "sky1.jpg",
           "title": "sky1"
