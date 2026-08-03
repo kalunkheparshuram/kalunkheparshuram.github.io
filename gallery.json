@@ -1,15 +1,6 @@
 {
-  "updated": "2026-08-01T14:09:24.109Z",
+  "updated": "2026-08-03T06:30:40.519Z",
   "categories": [
-    {
-      "name": "abstract",
-      "images": [
-        {
-          "file": "abstract1.jpg",
-          "title": "abstract1"
-        }
-      ]
-    },
     {
       "name": "clouds",
       "images": [
@@ -24,35 +15,6 @@
         {
           "file": "🤍 Sky Remembers.jpg",
           "title": "🤍 Sky Remembers"
-        },
-        {
-          "file": "cloud1.jpg",
-          "title": "cloud1"
-        },
-        {
-          "file": "cloud2.jpg",
-          "title": "cloud2"
-        },
-        {
-          "file": "cloud3.jpg",
-          "title": "cloud3"
-        },
-        {
-          "file": "cloud4.jpg",
-          "title": "cloud4"
-        },
-        {
-          "file": "cloud5.jpg",
-          "title": "cloud5"
-        }
-      ]
-    },
-    {
-      "name": "landscape",
-      "images": [
-        {
-          "file": "landscape1.jpg",
-          "title": "landscape1"
         }
       ]
     },
@@ -62,10 +24,6 @@
         {
           "file": "🍂 Every mile left something behind..jpg",
           "title": "🍂 Every mile left something behind."
-        },
-        {
-          "file": "motorcycle1.jpg",
-          "title": "motorcycle1"
         }
       ]
     },
@@ -95,42 +53,6 @@
         {
           "file": "🕉️ Celestial Presence (ॐ नमः शिवाय).jpg",
           "title": "🕉️ Celestial Presence (ॐ नमः शिवाय)"
-        },
-        {
-          "file": "nature3.jpg",
-          "title": "nature3"
-        },
-        {
-          "file": "nature4.jpg",
-          "title": "nature4"
-        },
-        {
-          "file": "nature5.jpg",
-          "title": "nature5"
-        },
-        {
-          "file": "nature6.jpg",
-          "title": "nature6"
-        },
-        {
-          "file": "nature7.jpg",
-          "title": "nature7"
-        },
-        {
-          "file": "nature8.jpg",
-          "title": "nature8"
-        },
-        {
-          "file": "nature9.jpg",
-          "title": "nature9"
-        },
-        {
-          "file": "nature10.jpg",
-          "title": "nature10"
-        },
-        {
-          "file": "nature11.jpg",
-          "title": "nature11"
         }
       ]
     },
@@ -140,10 +62,6 @@
         {
           "file": "✨ Luminous Horizon.jpg",
           "title": "✨ Luminous Horizon"
-        },
-        {
-          "file": "sky1.jpg",
-          "title": "sky1"
         }
       ]
     }
