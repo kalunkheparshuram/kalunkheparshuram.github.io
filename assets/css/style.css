@@ -223,7 +223,8 @@ body.nav-open{overflow:hidden;}
 }
 .masonry .tile .cap{
   position:absolute;left:0;right:0;bottom:0;padding:6px 8px;font-size:10px;color:var(--text);
-  background:linear-gradient(to top, rgba(0,0,0,.75), transparent);
+  background: rgba(0, 0, 0, 0.192);backdrop-filter: blur(5px);-webkit-backdrop-filter: blur(5px);
+  border: none;box-shadow: 0 10px 30px rgba(0, 0, 0, 0.212), inset 0 1px 1px rgba(255, 255, 255, 0.185);
 }
 #gallery-status{font-size:11px;color:var(--text-dim);margin-bottom:14px;}
 #lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;z-index:900;}
@@ -295,9 +296,11 @@ body.nav-open{overflow:hidden;}
 @media (max-width:520px){#toast{left:16px;right:16px;max-width:none;}}
 
 footer{padding:34px 0;text-align:center;color:var(--text-dim);font-size:12px;letter-spacing:.5px;}
+footer img {margin:10px auto;}
 @media (max-width:520px){footer{padding: 34px;} .ftr{display: block;}}
 
 focus visibility */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   outline:1px dashed var(--yellow);outline-offset:3px;
 }
+
