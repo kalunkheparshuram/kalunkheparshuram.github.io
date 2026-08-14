@@ -111,7 +111,8 @@
     if(!valid) return;
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending…';
+    const labelEl = submitBtn.querySelector('.label') || submitBtn;
+    labelEl.textContent = 'Sending…';
 
     try{
       const res = await fetch(FORM_ENDPOINT, {
@@ -128,7 +129,7 @@
       showToast('Something went wrong sending that. Try again, or email me directly.', 'fail');
     } finally{
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Message →';
+      labelEl.textContent = 'Send Message →';
     }
   });
 })();

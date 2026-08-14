@@ -7,8 +7,11 @@
   <title>[Parshuram Kalunkhe] — Portfolio</title>
   <meta name="description" content="Portfolio of [Your Name], [Your Title]. Projects, writing, and contact info.">
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://cdn.jsdelivr.net https://visitor-badge.laobi.icu data:; connect-src 'self' https://data.jsdelivr.com https://cdn.jsdelivr.net https://formsubmit.co; form-action https://formsubmit.co; base-uri 'self'; object-src 'none'; frame-ancestors 'none';">
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://cdn.jsdelivr.net https://visitor-badge.laobi.icu data:; connect-src 'self' https://data.jsdelivr.com https://cdn.jsdelivr.net https://formsubmit.co; form-action https://formsubmit.co; base-uri 'self'; object-src 'none'; frame-ancestors 'none';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
   <script src="assets/js/main.js" defer></script>
@@ -19,9 +22,12 @@
 
 <body>
 
+  <div class="noise" aria-hidden="true"></div>
+  <div class="gridlines" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
   <nav id="nav">
     <div class="wrap">
-      <div class="logo">[<span>P</span>K] <span style="color:var(--text-dim);font-size:11px;">// athreya.v3</span></div>
+      <div class="logo">[<span>P</span>K] <span style="color:var(--fg-muted);font-size:11px;">// athreya.v4</span></div>
       <button id="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
       <ul id="nav-list">
         <li><a href="#about">About</a></li>
@@ -34,26 +40,26 @@
     </div>
   </nav>
 
-  <!-- ============ HERO ============ -->
-  <header id="hero">
+  <!-- ============ HERO (dark section) ============ -->
+  <header id="hero" class="dark-section">
     <div class="wrap">
-      <div class="eyebrow">// hello, i'm</div>
-      <h1>[Parshuram <span class="accent">Kalunkhe</span>]</h1>
+      <div class="eyebrow">Hello, I'm</div>
+      <h1>Parshuram <span class="accent">Kalunkhe</span></h1>
       <div class="role-line"><span id="typed"></span></div>
+      <blockquote>Every bug tells a story — my job is to find it before someone else does.</blockquote>
       <p class="tagline">
-      <blockquote><i>" Every bug tells a story — my job is to find it before someone else does. "</i></blockquote>
-      Every application, website, and system has a story to tell—and sometimes that story begins with a hidden
-      vulnerability. I enjoy exploring how
-      software works, uncovering security flaws before they can be exploited, and practicing responsible disclosure
-      to help organizations build more secure products. Through continuous learning, security research, and bug
-      bounty programs, I'm always expanding my knowledge and contributing to a safer digital ecosystem.
+        Every application, website, and system has a story to tell—and sometimes that story begins with a hidden
+        vulnerability. I enjoy exploring how
+        software works, uncovering security flaws before they can be exploited, and practicing responsible disclosure
+        to help organizations build more secure products. Through continuous learning, security research, and bug
+        bounty programs, I'm always expanding my knowledge and contributing to a safer digital ecosystem.
       </p>
       <div class="hero-actions">
-        <a class="btn" href="#projects">View Projects</a>
+        <a class="btn" href="#projects"><span class="fill"></span><span class="label">View Projects</span></a>
         <a class="btn ghost" href="#blog">Read Blog</a>
         <a class="btn ghost" href="#contact">Contact Me</a>
       </div>
-      <div class="crt-swatch" aria-hidden="true"></div>
+      <span class="vert-label">Bug Bounty / Vol. 01</span>
     </div>
   </header>
 
@@ -142,6 +148,7 @@
         <button data-cat="landscape">Landscape</button>
         <button data-cat="abstract">Abstract</button>
       </div>
+      <button id="gallery-back" style="display:none;">← Back to all</button>
       <div id="gallery-status">Loading photos…</div>
       <div class="masonry reveal" id="masonry"></div>
     </div>
@@ -168,13 +175,13 @@
   </section>
 
   <!-- ============ CONTACT ============ -->
-  <section id="contact">
+  <section id="contact" class="dark-section">
     <div class="wrap">
       <span class="section-num">06</span>
       <h2 class="section-title reveal">Contact</h2>
       <div class="contact-grid">
         <div class="reveal">
-          <p style="color:var(--text);font-size:16px;">Have a project, role, or question in mind? Reach out below or
+          <p style="color:rgba(249,248,246,.78);font-size:1.05rem;font-family:var(--font-display);font-style:italic;">Have a project, role, or question in mind? Reach out below or
             through any of these.</p>
           <ul class="contact-links">
             <li><span>Email</span><a href="mailto:parshuramkalunkhe@proton.me">parshuramkalunkhe@proton.me</a></li>
@@ -185,9 +192,9 @@
             <li><span>Instagram</span><a href="https://www.instagram.com/parshuramkalunkhe" target="_blank"
                 rel="noopener noreferrer">instagram.com/parshuramkalunkhe</a></li>
             <li><span>#IRC</span><a href="#">comming soon.</a></li>
-            <li><span>Based in</span><span>[Mumbai, India]</span></li>
-            <li><span>Focus</span><span>[Security Research / Bug Bounty]</span></li>
-            <li><span>Available</span><span>[Open to work / Freelance]</span></li>
+            <li><span>Based in</span><span style="color:rgba(249,248,246,.78);">[Mumbai, India]</span></li>
+            <li><span>Focus</span><span style="color:rgba(249,248,246,.78);">[Security Research / Bug Bounty]</span></li>
+            <li><span>Available</span><span style="color:rgba(249,248,246,.78);">[Open to work / Freelance]</span></li>
           </ul>
         </div>
         <form class="form-min reveal" id="contact-form" novalidate>
@@ -197,20 +204,20 @@
           <input type="hidden" name="_honey" style="display:none">
           <div>
             <label for="c-name">Name</label>
-            <input id="c-name" name="name" type="text" maxlength="60" autocomplete="name" required>
+            <input id="c-name" name="name" type="text" maxlength="60" autocomplete="name" placeholder="Your name" required>
             <small class="err" id="e-name"></small>
           </div>
           <div>
             <label for="c-email">Email</label>
-            <input id="c-email" name="email" type="email" maxlength="120" autocomplete="email" required>
+            <input id="c-email" name="email" type="email" maxlength="120" autocomplete="email" placeholder="you@example.com" required>
             <small class="err" id="e-email"></small>
           </div>
           <div>
             <label for="c-msg">Message</label>
-            <textarea id="c-msg" name="message" rows="5" maxlength="2000" required></textarea>
+            <textarea id="c-msg" name="message" rows="5" maxlength="2000" placeholder="Tell me about it…" required></textarea>
             <small class="err" id="e-msg"></small>
           </div>
-          <button class="btn" id="c-submit" type="submit">Send Message →</button>
+          <button class="btn" id="c-submit" type="submit"><span class="fill"></span><span class="label">Send Message →</span></button>
           <div class="ok" id="c-ok">✓ Message sent — thanks, I'll get back to you soon.</div>
           <div class="err" id="c-fail">Something went wrong sending that. Try again, or email me directly.</div>
         </form>
