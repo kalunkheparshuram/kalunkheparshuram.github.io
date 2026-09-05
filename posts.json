@@ -1,6 +1,20 @@
 {
-  "updated": "2026-08-15T10:17:32.969Z",
+  "updated": "2026-09-05T17:56:54.518Z",
   "posts": [
+    {
+      "file": "the-philosophy-of-open-source-alternatives.md",
+      "slug": "philosophy-of-open-source-alternatives",
+      "title": "The Right to Look Inside",
+      "date": "2026-09-05",
+      "tags": [
+        "open-source",
+        "philosophy",
+        "autonomy",
+        "digital-sovereignty",
+        "ethics",
+        "self-hosting"
+      ]
+    },
     {
       "file": "building-a-more-open-digital-workspace.md",
       "slug": "open-source-digital-workspace",
